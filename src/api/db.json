@@ -1,0 +1,72 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "juancml1913",
+      "role": "administrador",
+      "password": "123"
+    },
+    {
+      "id": 2,
+      "name": "analu430",
+      "role": "estudiante",
+      "password": "123"
+    }
+  ],
+  "students": [
+    {
+      "id": "1",
+      "firstName": "daniel",
+      "secondName": "jose pablo",
+      "surname": "cruz",
+      "secondSurName": "casallas",
+      "typeDocument": 1,
+      "documentNumber": "123456789",
+      "email": "danielc88@gmail.co,",
+      "phone": "32123122314"
+    },
+    {
+      "id": "G_n9KjL",
+      "firstName": "Juan",
+      "secondName": "Camilo",
+      "surname": "Muñoz",
+      "secondSurName": "López",
+      "typeDocument": 1,
+      "documentNumber": "99999",
+      "email": "juancml1913",
+      "phone": "4387451"
+    }
+  ],
+  "questions": [
+    {
+      "question": "¿que dia es hoy?",
+      "id": "12"
+    },
+    {
+      "question": "¿que dia es hoy?",
+      "id": "13"
+    }
+  ],
+  "options": [
+    {
+      "question_id": "12",
+      "id": 1,
+      "option": "lunes"
+    },
+    {
+      "question_id": "12",
+      "id": 2,
+      "option": "martes"
+    },
+    {
+      "question_id": "12",
+      "id": 3,
+      "option": "miercoles"
+    },
+    {
+      "question_id": "12",
+      "id": 4,
+      "option": "jueves"
+    }
+  ]
+}
