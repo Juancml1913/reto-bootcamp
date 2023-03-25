@@ -1,17 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-/*{
-  id: 0, //1,
-  firstName: "", //"daniel",
-  secondName: "", //"jose",
-  surname: "", //"cruz",
-  secondSurName: "", //"casallas",
-  typeDocument: 0, //1,
-  documentNumber: "", //"123456789",
-  email: "", //"danielc88@gmail.co,",
-  phone: "", //"32123122314",
-},*/
-
 export const studentsSlice = createSlice({
   name: "students",
   initialState: [],

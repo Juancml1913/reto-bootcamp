@@ -8,6 +8,7 @@ export const authSlice = createSlice({
     name: "", //"jose daniel cruz casallas",
     role: "", //"estudiante", // "administrador"
     message: "", //"Ingreso exitoso"
+    token: "",
   },
   reducers: {
     login: (state, { payload }) => {
@@ -16,6 +17,7 @@ export const authSlice = createSlice({
       state.name = payload.name;
       state.role = payload.role;
       state.message = payload.message;
+      state.token = payload.token;
     },
     logout: (state, action) => {
       state.state = false; //true,
@@ -23,6 +25,7 @@ export const authSlice = createSlice({
       state.name = ""; //"jose daniel cruz casallas",
       state.role = ""; //"estudiante", // "administrador"
       state.message = "";
+      state.token = "";
     },
   },
 });

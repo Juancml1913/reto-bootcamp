@@ -5,11 +5,11 @@ import { get, store, update } from "./questionsSlice";
 export const storeQuestions = (question) => {
   return async (dispatch) => {
     await axios
-      .post("/questions", question)
+      .post("/questions/create", question)
       .then((res) => {
-        dispatch(store(res.data));
-        if (res.status === 201) {
-          dispatch(show("Operación exitosa."));
+        if (res.status === 204) {
+          dispatch(store(question.name));
+          dispatch(show(res.data.message));
         } else {
           dispatch(show("Operación erronea."));
         }
@@ -20,14 +20,14 @@ export const storeQuestions = (question) => {
       });
   };
 };
-export const updateQuestions = (student) => {
+export const updateQuestions = (question) => {
   return async (dispatch) => {
     await axios
-      .put(`/students/${student.id}`, student)
+      .put(`/questions/updateQuestion/${question.id}`, question)
       .then((res) => {
-        dispatch(update(res.data));
         if (res.status === 200) {
-          dispatch(show("Operación exitosa."));
+          dispatch(update(question));
+          dispatch(show(res.data.message));
         } else {
           dispatch(show("Operación erronea."));
         }
@@ -42,9 +42,9 @@ export const updateQuestions = (student) => {
 export const getQuestions = () => {
   return async (dispatch) => {
     await axios
-      .get("/questions")
+      .get("/questions/getQuestions")
       .then((res) => {
-        dispatch(get(res.data));
+        dispatch(get(res.data.questions));
       })
       .catch((err) => {
         console.log(err);

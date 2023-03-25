@@ -20,8 +20,7 @@ const QuestionsRoutes = () => {
       <Route path="/" element={<QuestionsPage />} />
       <Route path="/:id/options" element={<OptionsPage />} />
       <Route path="/create" element={<QuestionsForm edit={false} />} />
-      {/*
-      <Route path="/edit/:id" element={<StudentsForm edit={true} />} />*/}
+      <Route path="/edit/:id" element={<QuestionsForm edit={true} />} />
     </Routes>
   );
 };

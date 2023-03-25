@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "../pages/Home";
 import * as React from "react";
@@ -18,6 +18,7 @@ import StudentsPage from "../../students/pages/StudentsPage";
 import CustomAppBar from "../pages/CustomAppBar";
 import StudentsRoutes from "../../students/routes/StudentsRoutes";
 import QuestionsRoutes from "../../questions/routes/QuestionsRoutes";
+import { getTypeDocuments } from "../../store/typeDocuments/thunks";
 
 const theme = createTheme();
 
@@ -37,11 +38,12 @@ function Copyright() {
 const HomeRoutes = () => {
   const info = useSelector((state) => state.auth);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (!info.state) {
       navigate("/auth/login");
     }
+    dispatch(getTypeDocuments());
   }, []);
 
   return (
@@ -51,7 +53,7 @@ const HomeRoutes = () => {
       <main>
         <Container>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home info={info} />} />
             <Route path="/students/*" element={<StudentsRoutes />} />
             <Route path="/questions/*" element={<QuestionsRoutes />} />
           </Routes>

@@ -4,14 +4,12 @@ import { get } from "./optionsSlice";
 export const getOptions = (question_id) => {
   return async (dispatch) => {
     await axios
-      .get("/options")
+      .get(`/questions/getOptions/${question_id}`)
       .then((res) => {
-        const options = res.data.filter(
-          (option) => option.question_id === question_id
-        );
-        dispatch(get(options));
+        dispatch(get(res.data.options));
       })
       .catch((err) => {
+        dispatch(get([]));
         console.log(err);
       });
   };

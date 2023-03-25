@@ -17,15 +17,10 @@ const OptionsPage = () => {
       type: "actions",
       getActions: (params) => [
         <GridActionsCellItem
-          icon={
-            <IconButton
-              onClick={() => {
-                navigate(`/students/edit/${params.row.id}`);
-              }}
-            >
-              <EditIcon />
-            </IconButton>
-          }
+          icon={<EditIcon />}
+          onClick={() => {
+            navigate(`/students/edit/${params.row.id}`);
+          }}
           label="Edit"
         />,
       ],
@@ -34,6 +29,7 @@ const OptionsPage = () => {
   const { id } = useParams();
   useEffect(() => {
     dispatch(getOptions(id));
+    console.log(options);
   }, []);
 
   return (
@@ -47,7 +43,7 @@ const OptionsPage = () => {
           <h3>Respuestas</h3>
         </Grid>
         <Grid item sm={6}>
-          <h3>{questions.find((q) => q.id === id).question}</h3>
+          {/*<h3>{questions.find((q) => q.id === id).question}</h3>*/}
         </Grid>
       </Grid>
 

@@ -6,12 +6,12 @@ import { getStudents } from "../../store/students/thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 const StudentsPage = () => {
-  const students = useSelector((state) => state.students);
+  const { students, typeDocuments } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const columns = [
-    { field: "documentNumber", headerName: "# documento", width: 130 },
+    { field: "documentNumber", headerName: "# Documento", width: 130 },
     {
       field: "firstName",
       headerName: "Nombres",
@@ -33,13 +33,8 @@ const StudentsPage = () => {
       headerName: "Tipo de documento",
       width: 130,
       valueGetter: (params) => {
-        if (params.row.typeDocument === 1) {
-          return "Cedula";
-        } else if (params.row.typeDocument === 2) {
-          return "Tarjeta de identidad";
-        } else {
-          return "Cedula extranjera";
-        }
+        return typeDocuments.find((type) => type.id === params.row.typeDocument)
+          .name;
       },
     },
     { field: "email", headerName: "Email", width: 130 },
@@ -49,15 +44,10 @@ const StudentsPage = () => {
       type: "actions",
       getActions: (params) => [
         <GridActionsCellItem
-          icon={
-            <IconButton
-              onClick={() => {
-                navigate(`/students/edit/${params.row.id}`);
-              }}
-            >
-              <EditIcon />
-            </IconButton>
-          }
+          icon={<EditIcon />}
+          onClick={() => {
+            navigate(`/students/edit/${params.row.id}`);
+          }}
           label="Edit"
         />,
       ],

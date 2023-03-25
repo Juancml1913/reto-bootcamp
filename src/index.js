@@ -7,9 +7,13 @@ import AppRoutes from "./AppRoutes";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./store/store";
 
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://localhost:5000";
+//axios.defaults.withCredentials = true;
+axios.defaults.baseURL = "http://localhost:4001/api/v1";
+/*axios.defaults.headers.common["Access-Control-Allow-Credentials"] = true;
+axios.defaults.headers.common["Access-Control-Allow-Origin"] =
+  "http://localhost:3000";*/
 
+//axios.defaults.baseURL = "https://pruebasrepositorios.azurewebsites.net/api/v1";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>

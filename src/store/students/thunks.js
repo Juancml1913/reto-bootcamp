@@ -3,14 +3,13 @@ import { show } from "../message/messageSlice";
 import { get, store, update } from "./studentsSlice";
 
 export const storeStudents = (student) => {
-  student = { ...student, typeDocument: student.typeDocument + 1 };
   return async (dispatch) => {
     await axios
-      .post("/students", student)
+      .post("/user/create", student)
       .then((res) => {
-        dispatch(store(res.data));
         if (res.status === 201) {
-          dispatch(show("Operación exitosa."));
+          dispatch(store(student));
+          dispatch(show(res.data.message));
         } else {
           dispatch(show("Operación erronea."));
         }
@@ -22,14 +21,13 @@ export const storeStudents = (student) => {
   };
 };
 export const updateStudents = (student) => {
-  student = { ...student, typeDocument: student.typeDocument + 1 };
   return async (dispatch) => {
     await axios
-      .put(`/students/${student.id}`, student)
+      .put(`/user/update/${student.id}`, student)
       .then((res) => {
-        dispatch(update(res.data));
         if (res.status === 200) {
-          dispatch(show("Operación exitosa."));
+          dispatch(update(student));
+          dispatch(show(res.data.message));
         } else {
           dispatch(show("Operación erronea."));
         }
@@ -44,9 +42,9 @@ export const updateStudents = (student) => {
 export const getStudents = () => {
   return async (dispatch) => {
     await axios
-      .get("/students")
+      .get("/user/getUsers")
       .then((res) => {
-        dispatch(get(res.data));
+        dispatch(get(res.data.users));
       })
       .catch((err) => {
         console.log(err);

@@ -5,29 +5,21 @@ import { login, logout } from "./authSlice";
 export const signIn = ({ email, password }) => {
   return async (dispatch) => {
     await axios
-      .get("/users")
+      .post("/login", { email, password })
       .then((res) => {
         if (res.status === 200) {
-          const user = res.data.find(
-            (userDb) => userDb.name === email && userDb.password === password
-          );
-          if (user === undefined) {
-            dispatch(show("Email o password incorrectas."));
-          } else {
-            const newUser = {
-              ...user,
-              state: true,
-              message: "Operacion correcta",
-            };
-            dispatch(login(newUser));
-          }
+          dispatch(login(res.data));
+          dispatch(show(res.data.message));
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `bearer ${res.data.token}`;
         } else {
           dispatch(show("Operación erronea."));
         }
       })
       .catch((err) => {
         console.log(err);
-        dispatch(show("Operación erronea."));
+        dispatch(show(err.response.data.message));
       });
   };
 };

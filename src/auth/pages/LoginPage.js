@@ -1,10 +1,7 @@
-import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -15,6 +12,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { signIn } from "../../store/auth/thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Copyright(props) {
   return (
@@ -40,8 +38,13 @@ export default function LoginPage() {
   const dispatch = useDispatch();
 
   const auth = useSelector((state) => state.auth);
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth.state) {
+      navigate("/");
+    }
+  }, [auth]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -52,10 +55,6 @@ export default function LoginPage() {
         password: data.get("password"),
       })
     );
-
-    if (auth?.state) {
-      navigate("/");
-    }
   };
 
   return (

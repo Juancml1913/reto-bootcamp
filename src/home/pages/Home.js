@@ -5,20 +5,31 @@ import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-const cards = [
-  {
-    title: "Estudiantes",
-    link: "/students",
-    text: "Gestionar estudiantes",
-  },
-  {
-    title: "Preguntas",
-    link: "/questions",
-    text: "Gestionar preguntas",
-  },
-];
 
-export default function Home() {
+export default function Home({ info }) {
+  let cards = [];
+  if (info.role === "admin") {
+    cards = [
+      {
+        title: "Estudiantes",
+        link: "/students",
+        text: "Gestionar estudiantes",
+      },
+      {
+        title: "Preguntas",
+        link: "/questions",
+        text: "Gestionar preguntas",
+      },
+    ];
+  } else {
+    cards = [
+      {
+        title: "Formulario",
+        link: "/form",
+        text: "Diligenciar formulario",
+      },
+    ];
+  }
   return (
     <Grid container spacing={6} margin={1}>
       {cards.map((card) => (

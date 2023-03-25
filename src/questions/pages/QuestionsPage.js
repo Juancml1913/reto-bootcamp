@@ -1,4 +1,4 @@
-import { Grid, Breadcrumbs, IconButton } from "@mui/material";
+import { Grid, Breadcrumbs, IconButton, Tooltip } from "@mui/material";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
@@ -19,25 +19,26 @@ const QuestionsPage = () => {
       getActions: (params) => [
         <GridActionsCellItem
           icon={
-            <IconButton
-              onClick={() => {
-                navigate(`/students/edit/${params.row.id}`);
-              }}
-            >
+            <Tooltip title="Editar pregunta">
               <EditIcon />
-            </IconButton>
+            </Tooltip>
           }
+          onClick={() => {
+            navigate(`/questions/edit/${params.row.id}`);
+          }}
           label="Edit"
         />,
         <GridActionsCellItem
           icon={
-            <IconButton
-              onClick={() => {
-                navigate(`/questions/${params.row.id}/options`);
-              }}
-            >
-              <FactCheckIcon />
-            </IconButton>
+            <Tooltip title="Ver respuestas">
+              <IconButton
+                onClick={() => {
+                  navigate(`/questions/${params.row.id}/options`);
+                }}
+              >
+                <FactCheckIcon />
+              </IconButton>
+            </Tooltip>
           }
           label="Edit"
         />,
