@@ -7,7 +7,7 @@ export const storeQuestions = (question) => {
     await axios
       .post("/questions/create", question)
       .then((res) => {
-        if (res.status === 204) {
+        if (res.status === 200) {
           dispatch(store(question.name));
           dispatch(show(res.data.message));
         } else {

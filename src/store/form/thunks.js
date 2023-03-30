@@ -1,28 +1,26 @@
 import axios from "axios";
 import { show } from "../message/messageSlice";
-import { get, update } from "./optionsSlice";
+import { get, update } from "./formSlice";
 
-export const getOptions = (question_id) => {
+export const getForm = () => {
   return async (dispatch) => {
     await axios
-      .get(`/questions/getOptions/${question_id}`)
+      .get("/form/getquestions")
       .then((res) => {
-        dispatch(get(res.data.options));
+        dispatch(get(res.data.questions));
       })
       .catch((err) => {
-        dispatch(get([]));
         console.log(err);
       });
   };
 };
 
-export const updateOptions = (option) => {
+export const storeForm = (answers) => {
   return async (dispatch) => {
     await axios
-      .put(`/questions/updateAnswer/${option.id}`, option)
+      .post("/form/postquestions", answers)
       .then((res) => {
         if (res.status === 200) {
-          dispatch(update(option));
           dispatch(show(res.data.message));
         } else {
           dispatch(show("Operación erronea."));
@@ -30,7 +28,12 @@ export const updateOptions = (option) => {
       })
       .catch((err) => {
         console.log(err);
-        dispatch(show("Operación erronea."));
       });
+  };
+};
+
+export const updateState = (payload) => {
+  return async (dispatch) => {
+    dispatch(update(payload));
   };
 };

@@ -8,8 +8,14 @@ import { getOptions } from "../../store/options/thunks";
 const OptionsPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { id } = useParams();
+  useEffect(() => {
+    dispatch(getOptions(id));
+    console.log(options);
+  }, []);
+
   const options = useSelector((state) => state.options);
-  const questions = useSelector((state) => state.questions);
   const columns = [
     { field: "option", headerName: "Respuesta", width: 500 },
     {
@@ -19,18 +25,13 @@ const OptionsPage = () => {
         <GridActionsCellItem
           icon={<EditIcon />}
           onClick={() => {
-            navigate(`/students/edit/${params.row.id}`);
+            navigate(`/questions/${id}/options/${params.row.id}`);
           }}
           label="Edit"
         />,
       ],
     },
   ];
-  const { id } = useParams();
-  useEffect(() => {
-    dispatch(getOptions(id));
-    console.log(options);
-  }, []);
 
   return (
     <>

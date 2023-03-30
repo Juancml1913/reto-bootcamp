@@ -23,8 +23,12 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link
+        color="inherit"
+        href="https://juancamilomunozlopez.vercel.app/"
+        target="_blank"
+      >
+        Juan Camilo Muñoz López
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

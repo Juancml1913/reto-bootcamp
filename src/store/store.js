@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./auth/authSlice";
+import { formSlice } from "./form/formSlice";
 import { messageSlice } from "./message/messageSlice";
 import { optionsSlice } from "./options/optionsSlice";
 import { questionsSlice } from "./questions/questionsSlice";
@@ -14,5 +15,6 @@ export const store = configureStore({
     questions: questionsSlice.reducer,
     options: optionsSlice.reducer,
     typeDocuments: typeDocumentsSlice.reducer,
+    form: formSlice.reducer,
   },
 });
